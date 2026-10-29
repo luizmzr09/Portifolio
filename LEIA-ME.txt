@@ -1,0 +1,22 @@
+PORTFÓLIO — ARQUIVOS INICIAIS
+
+Como abrir:
+1. Extraia a pasta do ZIP.
+2. Abra index.html em um navegador moderno.
+3. Clique em "Abrir projeto" para testar as páginas dentro da janela do portfólio.
+
+Conteúdo:
+- index.html: página principal do portfólio
+- css/style.css: estilos, temas e responsividade
+- js/script.js: tema claro/escuro, menu, animações e janelas dos projetos
+- projetos/loja-sonical/index.html: arquivo enviado da Loja Sonical
+- projetos/techshop/index.html: arquivo enviado da TechShop
+
+Personalização pendente:
+- Nome para exibição
+- Foto pessoal
+- Revisar o texto de apresentação
+- Organizar os repositórios do GitHub e adicionar links específicos
+
+Observação:
+Os dois projetos enviados foram preservados como páginas independentes. A prévia em iframe funciona quando a pasta do portfólio é mantida inteira. Algumas imagens dos projetos originais dependem de URLs externas.
