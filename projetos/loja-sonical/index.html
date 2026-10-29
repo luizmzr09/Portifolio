@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Loja Sonical</title>
+
+
+<!--Professor, nesse site que fiz, eu adaptei o meu formulario antigo que eu fiz pro segundo bimestre e transformei em uma lojinha de produtos do Sonic para usar bem a API do CEP, e eh claro, eu não fiz isso tudo sozinho, o chat GPT realmente me ajudou muito nisso tudo, afinal são 1700+ linhas de codigos, mas a questão das imagens, cores de fonte, bordas, fundos e textos foi eu que fiz, espero que goste do que eu fiz :D-->
+
+<style>
+
+    /* Remove os espaços padrões da página */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* Estilo geral da página */
+    body {
+        background: linear-gradient(135deg, #0066ff, #00ccff);
+        min-height: 100vh;
+        padding: 30px;
+    }
+
+    /* Cabeçalho da página */
+    header {
+        background-color: white;
+        max-width: 1000px;
+        margin: 0 auto 25px;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        text-align: center;
+    }
+
+    header h1 {
+        color: #0066ff;
+        font-size: 38px;
+        margin-bottom: 10px;
+    }
+
+    header p {
+        color: #003399;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    /* Menu de navegação */
+    nav {
+        margin-top: 20px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 5px;
+        padding: 10px 20px;
+        border-radius: 20px;
+        background-color: #0066ff;
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    nav a:hover {
+        background-color: #003399;
+    }
+
+    main {
+        max-width: 1000px;
+        margin: auto;
+    }
+
+    /* Cada tela da página */
+    section {
+        background-color: white;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        margin-bottom: 25px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #0066ff;
+        margin-bottom: 25px;
+    }
+
+    /* Área dos produtos */
+    .produtos {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    /* Card de cada produto */
+    .produto {
+        background-color: #eeeeee;
+        border-radius: 18px;
+        padding: 20px;
+        text-align: center;
+        border: 3px solid #0066ff;
+    }
+
+    .produto img {
+        display: block;
+        width: 180px;
+        height: 180px;
+        object-fit: cover;
+        margin: 0 auto 15px;
+        border-radius: 15px;
+        border: 4px solid #ffcc00;
+    }
+
+    .produto h3 {
+        color: #003399;
+        margin-bottom: 10px;
+    }
+
+    .produto p {
+        margin-bottom: 15px;
+    }
+
+    .preco {
+        color: #0066ff;
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    /* Botões gerais */
+    .botao {
+        background-color: #0066ff;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .botao:hover {
+        background-color: #003399;
+    }
+
+    .botao:disabled {
+        background-color: gray;
+        cursor: not-allowed;
+    }
+
+    /* Campos dos formulários */
+    .formulario label,
+    .compra label {
+        display: block;
+        margin-top: 15px;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #003399;
+    }
+
+    .formulario input,
+    .compra input {
+        width: 100%;
+        padding: 11px;
+        border-radius: 10px;
+        border: 2px solid #0066ff;
+    }
+
+    /* Opções do formulário */
+    .opcao {
+        background-color: #eeeeee;
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+    }
+
+    .opcao img {
+        display: block;
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        margin: 15px auto;
+        border-radius: 15px;
+        border: 4px solid #ffcc00;
+    }
+
+    /* Área de busca do CEP */
+    .cep-area {
+        background-color: #eeeeee;
+        margin-top: 30px;
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .cep-area h2 {
+        margin-bottom: 20px;
+    }
+
+    .cep-area label {
+        margin-top: 0;
+    }
+
+    .buscar {
+        width: 100%;
+        margin-top: 15px;
+        padding: 12px;
+        border: none;
+        border-radius: 20px;
+        background-color: #0066ff;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .buscar:hover {
+        background-color: #003399;
+    }
+
+    .buscar:disabled {
+        background-color: gray;
+        cursor: not-allowed;
+    }
+
+    /* Mensagens de erro ou sucesso */
+    .mensagem {
+        text-align: center;
+        margin-top: 15px;
+        font-weight: bold;
+    }
+
+    .carregando {
+        color: #0066ff;
+    }
+
+    .erro {
+        color: #cc0000;
+    }
+
+    .sucesso {
+        color: green;
+    }
+
+    /* Resultado retornado pela API */
+    .resultado {
+        display: none;
+        margin-top: 20px;
+        padding: 20px;
+        background-color: white;
+        border: 2px solid #0066ff;
+        border-radius: 15px;
+    }
+
+    .resultado p {
+        margin-bottom: 10px;
+    }
+
+    .resultado strong {
+        color: #003399;
+    }
+
+    /* Produto mostrado na compra */
+    .produto-compra {
+        background-color: #eeeeee;
+        padding: 20px;
+        border-radius: 15px;
+        border: 3px solid #0066ff;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .produto-compra img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 15px;
+        border: 4px solid #ffcc00;
+        margin-bottom: 15px;
+    }
+
+    .produto-compra h3 {
+        color: #003399;
+        margin-bottom: 10px;
+    }
+
+    /* Botão para finalizar */
+    .finalizar {
+        width: 100%;
+        margin-top: 30px;
+        padding: 15px;
+        border: none;
+        border-radius: 20px;
+        background-color: #ffcc00;
+        color: #003399;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .finalizar:hover {
+        background-color: #ffdd55;
+    }
+
+    /* Botão para voltar */
+    .voltar {
+        width: 100%;
+        margin-top: 15px;
+        padding: 13px;
+        border: none;
+        border-radius: 20px;
+        background-color: #003399;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .voltar:hover {
+        background-color: #001f66;
+    }
+
+    /* Itens dentro do carrinho */
+    .item-carrinho {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        background-color: #eeeeee;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 15px;
+        border: 2px solid #0066ff;
+    }
+
+    .item-carrinho img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .item-info {
+        flex: 1;
+    }
+
+    .item-info h3 {
+        color: #003399;
+        margin-bottom: 8px;
+    }
+
+    .remover {
+        background-color: #cc0000;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 15px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .remover:hover {
+        background-color: #990000;
+    }
+
+    /* Texto quando o carrinho estiver vazio */
+    .carrinho-vazio {
+        text-align: center;
+        font-size: 18px;
+        margin: 20px 0;
+    }
+
+    /* Esconde as outras telas */
+    .escondido {
+        display: none;
+    }
+
+    footer {
+        max-width: 1000px;
+        margin: auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 20px;
+        text-align: center;
+        color: #003399;
+        font-weight: bold;
+    }
+
+    /* Ajustes para celular */
+    @media (max-width: 800px) {
+
+        .produtos {
+            grid-template-columns: 1fr;
+        }
+
+        .item-carrinho {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        body {
+            padding: 15px;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- Cabeçalho -->
+<header>
+
+    <h1>Loja Sonical</h1>
+
+    <p>Produtos e formulario para fãs do Sonic</p>
+
+    <!-- Menu para trocar entre as telas -->
+    <nav>
+
+        <a href="" id="menuLoja">Loja</a>
+
+        <a href="" id="menuCarrinho">
+            Carrinho (<span id="quantidadeCarrinho">0</span>)
+        </a>
+
+        <a href="" id="menuFormulario">Formulário</a>
+
+    </nav>
+
+</header>
+
+<main>
+
+    <!-- Página principal da loja -->
+    <section id="loja">
+
+        <h2>Produtos do Sonic</h2>
+
+        <div class="produtos">
+
+            <article class="produto">
+
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkmfMxRwW8gfA27ah87t8mqhgT0KwTTyi4aP7sVODk7g&s=10" alt="Pelúcia do Sonic">
+
+                <h3>Pelúcia do Sonic</h3>
+
+                <p>
+                    Uma pelucia do Sonic de algodão.
+                </p>
+
+                <div class="preco">R$ 59,90</div>
+
+                <!-- Adiciona o produto ao carrinho -->
+                <button
+                    type="button"
+                    class="botao btnProduto"
+                    data-produto="Pelúcia do Sonic"
+                    data-preco="59.90"
+                    data-imagem="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkmfMxRwW8gfA27ah87t8mqhgT0KwTTyi4aP7sVODk7g&s=10"
+                >
+                    Adicionar
+                </button>
+
+            </article>
+
+            <article class="produto">
+
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAWlbLZypWce2WNhDRSnmC4smSRQXV9bGC2ATz-HwZ6Q&s=10" alt="Camiseta do Sonic Tamanho G">
+
+                <h3>Camiseta Sonic tamanho G</h3>
+
+                <p>
+                    Camiseta do Sonic classico na cor vermelha, tamanho G.
+                </p>
+
+                <div class="preco">R$ 79,90</div>
+
+                <button
+                    type="button"
+                    class="botao btnProduto"
+                    data-produto="Camiseta Sonic"
+                    data-preco="79.90"
+                    data-imagem="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAWlbLZypWce2WNhDRSnmC4smSRQXV9bGC2ATz-HwZ6Q&s=10"
+                >
+                    Adicionar
+                </button>
+
+            </article>
+
+            <article class="produto">
+
+                <img src="https://http2.mlstatic.com/D_NQ_NP_2X_768329-MLA99635690532_122025-F.webp" alt="Caneca do Sonic">
+
+                <h3>Caneca Sonic</h3>
+
+                <p>
+                    Uma caneca de porcelana do Sonic.
+                </p>
+
+                <div class="preco">R$ 39,90</div>
+
+                <button
+                    type="button"
+                    class="botao btnProduto"
+                    data-produto="Caneca Sonic"
+                    data-preco="39.90"
+                    data-imagem="https://http2.mlstatic.com/D_NQ_NP_2X_768329-MLA99635690532_122025-F.webp"
+                >
+                    Adicionar
+                </button>
+
+            </article>
+
+        </div>
+
+        <p id="mensagemLoja" class="mensagem"></p>
+
+    </section>
+
+
+    <!-- Página do carrinho -->
+    <section id="carrinho" class="escondido">
+
+        <h2>Carrinho de compras</h2>
+
+        <!-- Os produtos serão colocados aqui pelo JavaScript -->
+        <div id="itensCarrinho"></div>
+
+        <p id="carrinhoVazio" class="carrinho-vazio">
+            Seu carrinho está vazio.
+        </p>
+
+        <h2 id="totalCarrinho">
+            Total: R$ 0,00
+        </h2>
+
+        <button
+            type="button"
+            class="finalizar"
+            id="btnIrCompra"
+        >
+            Finalizar compra
+        </button>
+
+        <button
+            type="button"
+            class="voltar"
+            id="btnVoltarLojaCarrinho"
+        >
+            Continuar comprando
+        </button>
+
+    </section>
+
+
+    <!-- Página de finalizar compra -->
+    <section id="compra" class="compra escondido">
+
+        <h2>Finalizar compra</h2>
+
+        <!-- Os produtos escolhidos aparecem aqui -->
+        <div id="produtosCompra"></div>
+
+        <label for="nomeCompraCliente">
+            Nome:
+        </label>
+
+        <input
+            type="text"
+            id="nomeCompraCliente"
+        >
+
+        <label for="emailCompra">
+            E-mail:
+        </label>
+
+        <input
+            type="email"
+            id="emailCompra"
+        >
+
+        <label for="cpf">
+            CPF:
+        </label>
+
+        <input
+            type="text"
+            id="cpf"
+            placeholder="000.000.000-00"
+            maxlength="14"
+        >
+
+        <!-- Parte que usa a API ViaCEP -->
+        <div class="cep-area">
+
+            <h2>Endereço de entrega</h2>
+
+            <label for="cep">
+                Digite seu CEP:
+            </label>
+
+            <input
+                type="text"
+                id="cep"
+                placeholder="Ex: 87013010"
+                maxlength="9"
+            >
+
+            <button
+                type="button"
+                class="buscar"
+                id="btnBuscar"
+            >
+                Buscar endereço
+            </button>
+
+            <!-- Mostra mensagens da busca -->
+            <p id="mensagem" class="mensagem"></p>
+
+            <!-- Mostra os dados encontrados -->
+            <div id="resultado" class="resultado">
+
+                <p>
+                    <strong>CEP:</strong>
+                    <span id="resultadoCep"></span>
+                </p>
+
+                <p>
+                    <strong>Logradouro:</strong>
+                    <span id="resultadoLogradouro"></span>
+                </p>
+
+                <p>
+                    <strong>Bairro:</strong>
+                    <span id="resultadoBairro"></span>
+                </p>
+
+                <p>
+                    <strong>Cidade:</strong>
+                    <span id="resultadoCidade"></span>
+                </p>
+
+                <p>
+                    <strong>Estado:</strong>
+                    <span id="resultadoEstado"></span>
+                </p>
+
+                <p>
+                    <strong>DDD:</strong>
+                    <span id="resultadoDDD"></span>
+                </p>
+
+            </div>
+
+        </div>
+
+        <button
+            type="button"
+            class="finalizar"
+            id="btnFinalizar"
+        >
+            Confirmar compra
+        </button>
+
+        <button
+            type="button"
+            class="voltar"
+            id="btnVoltarCarrinho"
+        >
+            Voltar para o carrinho
+        </button>
+
+    </section>
+
+
+    <!-- Página separada do formulário -->
+    <section id="formulario" class="formulario escondido">
+
+        <h2>Formulário Sonical</h2>
+
+        <label for="nome">
+            Digite seu nome:
+        </label>
+
+        <input type="text" id="nome">
+
+        <label for="email">
+            Digite seu E-mail:
+        </label>
+
+        <input type="email" id="email">
+
+        <label for="idade">
+            Digite sua idade:
+        </label>
+
+        <input type="number" id="idade">
+
+        <label>
+            Qual sua era do Sonic favorita?
+        </label>
+
+        <div class="opcao">
+
+            <button
+                type="button"
+                class="botao btnEscolha"
+            >
+                Sonic da era clássica
+            </button>
+
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjGTpwikYQDoTRJUYhhJN8R4lZX2DKLe3YxDcm0XA2fg&s=10" alt="Sonic Clássico">
+
+        </div>
+
+        <div class="opcao">
+
+            <button
+                type="button"
+                class="botao btnEscolha"
+            >
+                Sonic da era Dreamcast
+            </button>
+
+            <img src="https://i.pinimg.com/736x/0b/7c/42/0b7c42884e990ffeccb0e78d053ea8eb.jpg" alt="Sonic Dreamcast">
+
+        </div>
+
+        <div class="opcao">
+
+            <button
+                type="button"
+                class="botao btnEscolha"
+            >
+                Sonic da era moderna
+            </button>
+
+            <img src="https://static.wikia.nocookie.net/sonicgenerations/images/5/5c/Porraf.png/revision/latest?cb=20120323040016" alt="Sonic Moderno">
+
+        </div>
+
+        <label for="favorito">
+            Qual seu personagem favorito de Sonic?
+        </label>
+
+        <input type="text" id="favorito">
+
+        <label for="menosGostado">
+            Qual personagem você menos gosta?
+        </label>
+
+        <input type="text" id="menosGostado">
+
+        <button
+            type="button"
+            class="finalizar"
+            id="btnEnviar"
+        >
+            Enviar formulário
+        </button>
+
+        <button
+            type="button"
+            class="voltar"
+            id="btnVoltarLojaFormulario"
+        >
+            Voltar para a loja
+        </button>
+
+        <p
+            id="mensagemFormulario"
+            class="mensagem"
+        ></p>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <p>
+        Loja Sonical™ - Uma loja 100% real do Sonic - Feito por Luiz Gustavo para o professor Vinicius :D
+    </p>
+
+</footer>
+
+
+<script>
+
+    // Pega as principais telas da página
+    const loja = document.getElementById("loja");
+    const carrinhoPagina = document.getElementById("carrinho");
+    const compra = document.getElementById("compra");
+    const formulario = document.getElementById("formulario");
+
+    // Pega os botões do menu
+    const menuLoja = document.getElementById("menuLoja");
+    const menuCarrinho = document.getElementById("menuCarrinho");
+    const menuFormulario = document.getElementById("menuFormulario");
+
+    // Pega todos os botões de produtos
+    const botoesProduto =
+        document.getElementsByClassName("btnProduto");
+
+    // Pega os botões das escolhas do formulário
+    const botoesEscolha =
+        document.getElementsByClassName("btnEscolha");
+
+    // Vetor onde ficam os produtos adicionados
+    let carrinho = [];
+
+
+    // Esconde todas as telas
+    function esconderPaginas() {
+
+        loja.classList.add("escondido");
+        carrinhoPagina.classList.add("escondido");
+        compra.classList.add("escondido");
+        formulario.classList.add("escondido");
+
+    }
+
+
+    // Volta a página para o topo
+    function voltarTopo() {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    // Abre a página da loja
+    function mostrarLoja() {
+
+        esconderPaginas();
+
+        loja.classList.remove("escondido");
+
+        voltarTopo();
+
+    }
+
+
+    // Abre a página do carrinho
+    function mostrarCarrinho() {
+
+        esconderPaginas();
+
+        carrinhoPagina.classList.remove("escondido");
+
+        atualizarCarrinho();
+
+        voltarTopo();
+
+    }
+
+
+    // Abre o formulário
+    function mostrarFormulario() {
+
+        esconderPaginas();
+
+        formulario.classList.remove("escondido");
+
+        voltarTopo();
+
+    }
+
+
+    // Faz os links do menu não recarregarem a página
+    menuLoja.addEventListener("click", function(evento) {
+
+        evento.preventDefault();
+
+        mostrarLoja();
+
+    });
+
+
+    menuCarrinho.addEventListener("click", function(evento) {
+
+        evento.preventDefault();
+
+        mostrarCarrinho();
+
+    });
+
+
+    menuFormulario.addEventListener("click", function(evento) {
+
+        evento.preventDefault();
+
+        mostrarFormulario();
+
+    });
+
+
+    // Adiciona os produtos ao carrinho
+    for (let i = 0; i < botoesProduto.length; i++) {
+
+        botoesProduto[i].addEventListener(
+            "click",
+            function() {
+
+                // Cria um objeto com os dados do produto
+                const produto = {
+
+                    nome:
+                        botoesProduto[i].dataset.produto,
+
+                    preco:
+                        Number(
+                            botoesProduto[i].dataset.preco
+                        ),
+
+                    imagem:
+                        botoesProduto[i].dataset.imagem
+
+                };
+
+                // Coloca o produto no carrinho
+                carrinho.push(produto);
+
+                atualizarCarrinho();
+
+                // Mostra uma mensagem para o usuário
+                const mensagemLoja =
+                    document.getElementById(
+                        "mensagemLoja"
+                    );
+
+                mensagemLoja.textContent =
+                    produto.nome +
+                    " foi adicionado ao carrinho!";
+
+                mensagemLoja.className =
+                    "mensagem sucesso";
+
+            }
+        );
+
+    }
+
+
+    // Atualiza os produtos mostrados no carrinho
+    function atualizarCarrinho() {
+
+        const itensCarrinho =
+            document.getElementById(
+                "itensCarrinho"
+            );
+
+        const carrinhoVazio =
+            document.getElementById(
+                "carrinhoVazio"
+            );
+
+        const totalCarrinho =
+            document.getElementById(
+                "totalCarrinho"
+            );
+
+        const quantidadeCarrinho =
+            document.getElementById(
+                "quantidadeCarrinho"
+            );
+
+        // Limpa o carrinho antes de mostrar novamente
+        itensCarrinho.innerHTML = "";
+
+        let total = 0;
+
+        // Atualiza o número do menu
+        quantidadeCarrinho.textContent =
+            carrinho.length;
+
+
+        // Se não tiver produtos
+        if (carrinho.length === 0) {
+
+            carrinhoVazio.style.display = "block";
+
+        } else {
+
+            carrinhoVazio.style.display = "none";
+
+        }
+
+
+        // Cria cada item do carrinho
+        for (let i = 0; i < carrinho.length; i++) {
+
+            total += carrinho[i].preco;
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "item-carrinho";
+
+
+            // Imagem do produto
+            const imagem =
+                document.createElement("img");
+
+            imagem.src =
+                carrinho[i].imagem;
+
+            imagem.alt =
+                carrinho[i].nome;
+
+
+            // Informações do produto
+            const informacoes =
+                document.createElement("div");
+
+            informacoes.className =
+                "item-info";
+
+            const nome =
+                document.createElement("h3");
+
+            nome.textContent =
+                carrinho[i].nome;
+
+            const preco =
+                document.createElement("p");
+
+            preco.textContent =
+                "R$ " +
+                carrinho[i].preco
+                .toFixed(2)
+                .replace(".", ",");
+
+            informacoes.appendChild(nome);
+
+            informacoes.appendChild(preco);
+
+
+            // Botão para remover o produto
+            const botaoRemover =
+                document.createElement("button");
+
+            botaoRemover.textContent =
+                "Remover";
+
+            botaoRemover.className =
+                "remover";
+
+
+            // Remove o produto pelo número dele no vetor
+            botaoRemover.addEventListener(
+                "click",
+                function() {
+
+                    carrinho.splice(i, 1);
+
+                    atualizarCarrinho();
+
+                }
+            );
+
+
+            item.appendChild(imagem);
+
+            item.appendChild(informacoes);
+
+            item.appendChild(botaoRemover);
+
+            itensCarrinho.appendChild(item);
+
+        }
+
+
+        // Mostra o valor total
+        totalCarrinho.textContent =
+            "Total: R$ " +
+            total.toFixed(2).replace(".", ",");
+
+    }
+
+
+    // Botão para continuar comprando
+    const btnVoltarLojaCarrinho =
+        document.getElementById(
+            "btnVoltarLojaCarrinho"
+        );
+
+
+    btnVoltarLojaCarrinho.addEventListener(
+        "click",
+        mostrarLoja
+    );
+
+
+    // Botão para ir do carrinho para a compra
+    const btnIrCompra =
+        document.getElementById(
+            "btnIrCompra"
+        );
+
+
+    btnIrCompra.addEventListener(
+        "click",
+        function() {
+
+            // Não deixa finalizar com o carrinho vazio
+            if (carrinho.length === 0) {
+
+                return;
+
+            }
+
+            esconderPaginas();
+
+            compra.classList.remove("escondido");
+
+            mostrarProdutosCompra();
+
+            voltarTopo();
+
+        }
+    );
+
+
+    // Mostra os produtos escolhidos na compra
+    function mostrarProdutosCompra() {
+
+        const produtosCompra =
+            document.getElementById(
+                "produtosCompra"
+            );
+
+        produtosCompra.innerHTML = "";
+
+
+        // Mostra todos os produtos adicionados
+        for (let i = 0; i < carrinho.length; i++) {
+
+            const produto =
+                document.createElement("div");
+
+            produto.className =
+                "produto-compra";
+
+            const imagem =
+                document.createElement("img");
+
+            imagem.src =
+                carrinho[i].imagem;
+
+            imagem.alt =
+                carrinho[i].nome;
+
+            const nome =
+                document.createElement("h3");
+
+            nome.textContent =
+                carrinho[i].nome;
+
+            const preco =
+                document.createElement("div");
+
+            preco.className =
+                "preco";
+
+            preco.textContent =
+                "R$ " +
+                carrinho[i].preco
+                .toFixed(2)
+                .replace(".", ",");
+
+            produto.appendChild(imagem);
+
+            produto.appendChild(nome);
+
+            produto.appendChild(preco);
+
+            produtosCompra.appendChild(produto);
+
+        }
+
+    }
+
+
+    // Volta da compra para o carrinho
+    const btnVoltarCarrinho =
+        document.getElementById(
+            "btnVoltarCarrinho"
+        );
+
+
+    btnVoltarCarrinho.addEventListener(
+        "click",
+        mostrarCarrinho
+    );
+
+
+    // Seleciona apenas uma era do Sonic
+    for (let i = 0; i < botoesEscolha.length; i++) {
+
+        botoesEscolha[i].addEventListener(
+            "click",
+            function() {
+
+                // Primeiro remove a seleção dos outros
+                for (
+                    let j = 0;
+                    j < botoesEscolha.length;
+                    j++
+                ) {
+
+                    botoesEscolha[j].disabled =
+                        false;
+
+                    botoesEscolha[j].textContent =
+                        botoesEscolha[j]
+                        .textContent
+                        .replace(" ✓", "");
+
+                }
+
+                // Marca a opção escolhida
+                botoesEscolha[i].disabled =
+                    true;
+
+                botoesEscolha[i].textContent +=
+                    " ✓";
+
+            }
+        );
+
+    }
+
+
+    // Botão para voltar do formulário
+    const btnVoltarLojaFormulario =
+        document.getElementById(
+            "btnVoltarLojaFormulario"
+        );
+
+
+    btnVoltarLojaFormulario.addEventListener(
+        "click",
+        mostrarLoja
+    );
+
+
+    // Pega o campo do CPF
+    const campoCpf =
+        document.getElementById("cpf");
+
+
+    // Coloca os pontos e o traço automaticamente
+    campoCpf.addEventListener(
+        "input",
+        function() {
+
+            let cpf =
+                campoCpf.value.replace(
+                    /\D/g,
+                    ""
+                );
+
+            cpf =
+                cpf.substring(0, 11);
+
+
+            if (cpf.length > 9) {
+
+                cpf =
+                    cpf.substring(0, 3) +
+                    "." +
+                    cpf.substring(3, 6) +
+                    "." +
+                    cpf.substring(6, 9) +
+                    "-" +
+                    cpf.substring(9, 11);
+
+            } else if (cpf.length > 6) {
+
+                cpf =
+                    cpf.substring(0, 3) +
+                    "." +
+                    cpf.substring(3, 6) +
+                    "." +
+                    cpf.substring(6);
+
+            } else if (cpf.length > 3) {
+
+                cpf =
+                    cpf.substring(0, 3) +
+                    "." +
+                    cpf.substring(3);
+
+            }
+
+            campoCpf.value = cpf;
+
+        }
+    );
+
+
+    // Verifica se o CPF digitado é válido
+    function cpfValido(cpf) {
+
+        cpf =
+            cpf.replace(/\D/g, "");
+
+
+        // CPF precisa ter 11 números
+        if (cpf.length !== 11) {
+
+            return false;
+
+        }
+
+
+        // Não aceita números repetidos
+        if (/^(\d)\1{10}$/.test(cpf)) {
+
+            return false;
+
+        }
+
+
+        let soma = 0;
+
+
+        // Calcula o primeiro dígito
+        for (let i = 0; i < 9; i++) {
+
+            soma +=
+                Number(cpf.charAt(i)) *
+                (10 - i);
+
+        }
+
+
+        let primeiroDigito =
+            (soma * 10) % 11;
+
+
+        if (primeiroDigito === 10) {
+
+            primeiroDigito = 0;
+
+        }
+
+
+        if (
+            primeiroDigito !==
+            Number(cpf.charAt(9))
+        ) {
+
+            return false;
+
+        }
+
+
+        soma = 0;
+
+
+        // Calcula o segundo dígito
+        for (let i = 0; i < 10; i++) {
+
+            soma +=
+                Number(cpf.charAt(i)) *
+                (11 - i);
+
+        }
+
+
+        let segundoDigito =
+            (soma * 10) % 11;
+
+
+        if (segundoDigito === 10) {
+
+            segundoDigito = 0;
+
+        }
+
+
+        return (
+            segundoDigito ===
+            Number(cpf.charAt(10))
+        );
+
+    }
+
+
+    // Elementos usados na busca do CEP
+    const campoCep =
+        document.getElementById("cep");
+
+    const btnBuscar =
+        document.getElementById("btnBuscar");
+
+    const mensagem =
+        document.getElementById("mensagem");
+
+    const resultado =
+        document.getElementById("resultado");
+
+
+    // Busca o endereço usando a API ViaCEP
+    async function buscarCep() {
+
+        // Remove espaços e caracteres que não são números
+        let cep =
+            campoCep.value.trim();
+
+        cep =
+            cep.replace(/\D/g, "");
+
+
+        // Verifica se o CEP tem 8 números
+        if (cep.length !== 8) {
+
+            mensagem.textContent =
+                "Digite um CEP válido com 8 números.";
+
+            mensagem.className =
+                "mensagem erro";
+
+            resultado.style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        // Desativa o botão durante a busca
+        btnBuscar.disabled = true;
+
+        mensagem.textContent =
+            "Buscando...";
+
+        mensagem.className =
+            "mensagem carregando";
+
+        resultado.style.display =
+            "none";
+
+
+        try {
+
+            // Faz a requisição GET para a API
+            const resposta =
+                await fetch(
+                    `https://viacep.com.br/ws/${cep}/json/`
+                );
+
+
+            // Verifica se a requisição deu certo
+            if (!resposta.ok) {
+
+                throw new Error();
+
+            }
+
+
+            // Converte a resposta para JSON
+            const dados =
+                await resposta.json();
+
+
+            // A API retorna erro quando o CEP não existe
+            if (dados.erro) {
+
+                mensagem.textContent =
+                    "CEP não encontrado.";
+
+                mensagem.className =
+                    "mensagem erro";
+
+                return;
+
+            }
+
+
+            // Coloca os dados encontrados na tela
+            document.getElementById(
+                "resultadoCep"
+            ).textContent =
+                dados.cep;
+
+
+            document.getElementById(
+                "resultadoLogradouro"
+            ).textContent =
+                dados.logradouro ||
+                "Não informado";
+
+
+            document.getElementById(
+                "resultadoBairro"
+            ).textContent =
+                dados.bairro ||
+                "Não informado";
+
+
+            document.getElementById(
+                "resultadoCidade"
+            ).textContent =
+                dados.localidade;
+
+
+            document.getElementById(
+                "resultadoEstado"
+            ).textContent =
+                dados.uf;
+
+
+            document.getElementById(
+                "resultadoDDD"
+            ).textContent =
+                dados.ddd ||
+                "Não informado";
+
+
+            // Mostra o resultado
+            resultado.style.display =
+                "block";
+
+            mensagem.textContent =
+                "Endereço encontrado!";
+
+            mensagem.className =
+                "mensagem sucesso";
+
+
+        } catch (erro) {
+
+            // Caso aconteça algum problema
+            mensagem.textContent =
+                "Não foi possível consultar o CEP. Tente novamente.";
+
+            mensagem.className =
+                "mensagem erro";
+
+            resultado.style.display =
+                "none";
+
+        } finally {
+
+            // Ativa o botão novamente no final
+            btnBuscar.disabled = false;
+
+        }
+
+    }
+
+
+    // Chama a busca ao clicar no botão
+    btnBuscar.addEventListener(
+        "click",
+        buscarCep
+    );
+
+
+    // Também permite buscar apertando Enter
+    campoCep.addEventListener(
+        "keydown",
+        function(evento) {
+
+            if (
+                evento.key === "Enter" &&
+                !btnBuscar.disabled
+            ) {
+
+                evento.preventDefault();
+
+                buscarCep();
+
+            }
+
+        }
+    );
+
+
+    // Botão para confirmar a compra
+    const btnFinalizar =
+        document.getElementById(
+            "btnFinalizar"
+        );
+
+
+    btnFinalizar.addEventListener(
+        "click",
+        function() {
+
+            const cpf =
+                campoCpf.value;
+
+
+            // Verifica o CPF antes de finalizar
+            if (!cpfValido(cpf)) {
+
+                mensagem.textContent =
+                    "Digite um CPF válido.";
+
+                mensagem.className =
+                    "mensagem erro";
+
+                return;
+
+            }
+
+
+            mensagem.textContent =
+                "Compra realizada com sucesso! :D";
+
+            mensagem.className =
+                "mensagem sucesso";
+
+        }
+    );
+
+
+    // Elementos do envio do formulário
+    const btnEnviar =
+        document.getElementById("btnEnviar");
+
+    const mensagemFormulario =
+        document.getElementById(
+            "mensagemFormulario"
+        );
+
+
+    // Mostra uma mensagem ao enviar
+    btnEnviar.addEventListener(
+        "click",
+        function() {
+
+            mensagemFormulario.textContent =
+                "Obrigado por participar da pesquisa! :D";
+
+            mensagemFormulario.className =
+                "mensagem sucesso";
+
+        }
+    );
+
+</script>
+```
+
+</body>
+
+</html>
