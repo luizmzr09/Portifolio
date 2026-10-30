@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco Tche Tche | Luiz Gustavo</title>
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <style>
+        .project-page {
+            width: min(1000px, 88%);
+            margin: 0 auto;
+            padding: 55px 0 80px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 35px;
+        }
+
+        .back-link:hover {
+            color: var(--blue);
+        }
+
+        .project-header {
+            margin-bottom: 35px;
+        }
+
+        .project-header h1 {
+            font: 700 clamp(34px, 5vw, 48px)/1.15 'Space Grotesk', sans-serif;
+            letter-spacing: -1.5px;
+            margin: 8px 0 15px;
+        }
+
+        .project-description {
+            color: var(--muted);
+            max-width: 700px;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .project-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .code-section {
+            margin-top: 45px;
+        }
+
+        .code-section h2 {
+            font: 600 23px 'Space Grotesk', sans-serif;
+            margin-bottom: 15px;
+        }
+
+        .code-container {
+            border: 1px solid var(--line);
+            border-radius: 15px;
+            overflow: hidden;
+            background: var(--surface);
+        }
+
+        .code-header {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 13px 17px;
+            border-bottom: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .code-header span:last-child {
+            margin-left: auto;
+        }
+
+        .code-container pre {
+            margin: 0;
+            padding: 22px;
+            overflow-x: auto;
+            color: var(--text);
+            font: 13px/1.7 Consolas, monospace;
+            tab-size: 4;
+        }
+
+        .code-container code {
+            font: inherit;
+        }
+
+        @media (max-width: 600px) {
+            .project-page {
+                padding-top: 35px;
+            }
+
+            .code-container pre {
+                padding: 15px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="topbar">
+        <a href="../../index.html" class="brand">
+            <span class="brand-mark">LM</span>
+            Luiz Gustavo<span class="brand-dot">.</span>
+        </a>
+
+        <a href="../../index.html#projetos" class="button button-secondary">
+            Voltar ao portfólio
+        </a>
+    </header>
+
+    <main class="project-page">
+
+        <a href="../../index.html#projetos" class="back-link">
+            ← Voltar para os projetos
+        </a>
+
+        <section class="project-header">
+            <p class="eyebrow">PROJETO EM C</p>
+
+            <h1>Banco Tche Tche</h1>
+
+            <p class="project-description">
+                Programa que simula um sistema bancário simples, permitindo
+                consultar o saldo, realizar depósitos e efetuar saques por
+                meio de um menu interativo no terminal.
+            </p>
+
+            <div class="tech-tags">
+                <span>C++</span>
+                <span>Condicionais</span>
+                <span>Laços de repetição</span>
+                <span>Menu interativo</span>
+            </div>
+
+            <div class="project-actions">
+                <a href="banco.cpp" download class="button button-primary">
+                    Baixar código (.cpp)
+                </a>
+
+                <a href="../../index.html#projetos" class="button button-secondary">
+                    Outros projetos
+                </a>
+            </div>
+        </section>
+
+        <section class="code-section">
+            <h2>Código-fonte</h2>
+
+            <div class="code-container">
+                <div class="code-header">
+                    <span>●</span>
+                    <span>banco.cpp</span>
+                    <span>Arquivo original</span>
+                </div>
+
+                <pre><code>#include &lt;stdio.h&gt;
+main()
+{
+    int i, opt;
+    float Sald, Depo, Saq;
+    opt=1;
+    Sald=1000;
+    while (opt!=4)
+    {
+        printf("\nBanco tche tche --seu dinheiro com voce--");
+        printf("\n1-Consultar saldo");
+        printf("\n2-Depositar");
+        printf("\n3-Sacar");
+        printf("\n4-Sair");
+        printf("\nQual opcao deseja? ");
+        scanf("%i", &amp;opt);
+        switch (opt)
+        {
+            case 1:
+                printf("Seu saldo e de: %.2f", Sald);
+                break;
+            case 2:
+                printf("Quanto voce deseja depositar? ");
+                scanf("%f", &amp;Depo);
+                Sald=Sald+Depo;
+                printf("Foi depositado %.2f, agora o saldo e de: %.2f", Depo, Sald);
+                break;
+            case 3:
+                printf("Quanto deseja sacar?");
+                scanf("%f", &amp;Saq);
+                Sald=Sald-Saq;
+                printf("Foi sacado %.2f, agora seu saldo e de: %.2f", Saq, Sald);
+                break;
+            case 4:
+                printf("Banco fechado, vlw por confiar em nosso banco :)");
+                break;
+            default:
+                printf("Opcao nao definida!");
+                break;
+        }
+    }
+}</code></pre>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="../../js/script.js"></script>
+</body>
+</html>
