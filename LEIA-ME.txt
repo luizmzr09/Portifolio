@@ -6,3 +6,5 @@ Projetos web: as páginas Loja Sonical e TechShop são abertas em iframe no moda
 Projetos em C: Banco Tche Tche, Campeonato Brasileiro e Conversor de Moedas possuem páginas com terminal interativo que simula no navegador a entrada e saída dos programas. O GitHub Pages não executa binários C/C++; por isso a interação foi reproduzida em JavaScript, mantendo os arquivos .cpp originais disponíveis para download.
 
 A foto pessoal está em assets/foto-perfil.jpeg.
+
+PokeSearch: projeto em projetos/pokesearch/index.html. Consulta a PokéAPI diretamente pelo navegador e apresenta sprite, tipos, habilidades, altura, peso e atributos base. Requer conexão com a internet para consultar a API.

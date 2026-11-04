@@ -1338,3 +1338,22 @@ button {
 .c-code-panel pre { overflow:auto; max-height:460px; padding:16px; border-radius:10px; background:var(--surface2); color:var(--text); font:12px/1.65 Consolas,monospace; }
 .c-project-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
 @media(max-width:760px){ .c-project-layout{grid-template-columns:1fr;} .c-project-page{padding-top:30px;} .c-terminal-output{min-height:250px;} }
+
+
+/* Prévia do projeto PokeSearch */
+.pokesearch-preview {
+  background: radial-gradient(circle at 50% 42%, #27366a 0, #17213d 38%, #101728 78%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 9px;
+  position: relative; overflow: hidden;
+}
+.pokesearch-preview::before, .pokesearch-preview::after {
+  content: ""; position: absolute; border: 1px solid rgba(139,124,255,.22);
+  width: 190px; height: 190px; border-radius: 50%;
+}
+.pokesearch-preview::after { width: 245px; height: 245px; border-color: rgba(85,214,232,.12); }
+.poke-preview-orb { width: 86px; height: 86px; border-radius: 26px; display: grid; place-items: center;
+  font-size: 48px; color: #a99cff; background: linear-gradient(135deg,#8175f633,#55d6e833);
+  border: 1px solid rgba(169,156,255,.35); box-shadow: 0 12px 45px #0005; z-index: 1;
+}
+.poke-preview-name { color: #eef1ff; font: 700 20px 'Space Grotesk',sans-serif; letter-spacing: -.5px; z-index: 1; }
+.pokesearch-preview .project-number { z-index: 2; }
