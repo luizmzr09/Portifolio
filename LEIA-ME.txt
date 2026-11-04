@@ -1,10 +1,35 @@
-PORTFÓLIO — LUIZ GUSTAVO MAZUR LINS
+ Esse é meu portfólio pessoal, criado para mostrar alguns projetos que desenvolvi durante o curso de Engenharia de Software na UNINGÁ.
 
-Abra index.html em um navegador ou publique a pasta no GitHub Pages.
+ O site tem informações sobre mim, as tecnologias que estou estudando e meus projetos.
 
-Projetos web: as páginas Loja Sonical e TechShop são abertas em iframe no modal do portfólio.
-Projetos em C: Banco Tche Tche, Campeonato Brasileiro e Conversor de Moedas possuem páginas com terminal interativo que simula no navegador a entrada e saída dos programas. O GitHub Pages não executa binários C/C++; por isso a interação foi reproduzida em JavaScript, mantendo os arquivos .cpp originais disponíveis para download.
+Tecnologias utilizadas
 
-A foto pessoal está em assets/foto-perfil.jpeg.
+- HTML: estrutura do site.
+- CSS: aparência, cores e responsividade.
+- JavaScript: interações, temas e funcionamento dos projetos.
+- C++: programas de terminal.
+- GitHub Pages: hospedagem do site.
 
-PokeSearch: projeto em projetos/pokesearch/index.html. Consulta a PokéAPI diretamente pelo navegador e apresenta sprite, tipos, habilidades, altura, peso e atributos base. Requer conexão com a internet para consultar a API.
+Projetos
+
+ O portfólio conta com 6 projetos, separados em duas categorias:
+
+Projetos em HTML
+- Loja Sonical
+- TechShop
+- PokeSearch
+
+Projetos em C++
+- Banco Tche Tche
+- Campeonato Brasileiro
+- Conversor de Moedas
+
+Como utilizei o iframe: O iframe foi usado para abrir os projetos HTML dentro do próprio portfólio, sem precisar abrir outra aba. Quando clicamos em "Abrir projeto", o JavaScript pega o caminho do projeto escolhido e coloca no `src` do iframe, mostrando o site em uma janela que pode ser fechada. Já os projetos em C++ possuem uma simulação de terminal feita com JavaScript, pois  GitHub Pages não executa programas C++ como os HTML.
+
+Autor
+
+Luiz Gustavo Mazur Lins
+
+Engenharia de Software — UNINGÁ
+
+GitHub: https://github.com/luizmzr09
