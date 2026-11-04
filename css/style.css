@@ -1372,3 +1372,22 @@ button {
 .pokesearch-preview::before, .pokesearch-preview::after { display: none; }
 .poke-preview-orb { border-radius: 50%; color: #172f55; background: #f5ca45; border: 5px solid #f8f9fb; box-shadow: none; }
 .poke-preview-name { color: #f8fafc; }
+
+
+/* Ajustes finais de contato */
+.contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.email-button {
+    min-width: 220px;
+}
+
+.contact-email-note {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 14px;
+}
