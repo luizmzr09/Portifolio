@@ -1,22 +1,8 @@
-PORTFÓLIO — ARQUIVOS INICIAIS
+PORTFÓLIO — LUIZ GUSTAVO MAZUR LINS
 
-Como abrir:
-1. Extraia a pasta do ZIP.
-2. Abra index.html em um navegador moderno.
-3. Clique em "Abrir projeto" para testar as páginas dentro da janela do portfólio.
+Abra index.html em um navegador ou publique a pasta no GitHub Pages.
 
-Conteúdo:
-- index.html: página principal do portfólio
-- css/style.css: estilos, temas e responsividade
-- js/script.js: tema claro/escuro, menu, animações e janelas dos projetos
-- projetos/loja-sonical/index.html: arquivo enviado da Loja Sonical
-- projetos/techshop/index.html: arquivo enviado da TechShop
+Projetos web: as páginas Loja Sonical e TechShop são abertas em iframe no modal do portfólio.
+Projetos em C: Banco Tche Tche, Campeonato Brasileiro e Conversor de Moedas possuem páginas com terminal interativo que simula no navegador a entrada e saída dos programas. O GitHub Pages não executa binários C/C++; por isso a interação foi reproduzida em JavaScript, mantendo os arquivos .cpp originais disponíveis para download.
 
-Personalização pendente:
-- Nome para exibição
-- Foto pessoal
-- Revisar o texto de apresentação
-- Organizar os repositórios do GitHub e adicionar links específicos
-
-Observação:
-Os dois projetos enviados foram preservados como páginas independentes. A prévia em iframe funciona quando a pasta do portfólio é mantida inteira. Algumas imagens dos projetos originais dependem de URLs externas.
+A foto pessoal está em assets/foto-perfil.jpeg.
