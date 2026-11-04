@@ -1306,3 +1306,35 @@ button {
         right: -85px;
     }
 }
+
+
+/* Fotos do portfólio */
+.hero-profile-photo { display:block; width:100%; aspect-ratio:4 / 4.5; object-fit:cover; object-position:center 35%; border-radius:15px; }
+.about-profile-photo { display:block; width:100%; aspect-ratio:4 / 4.3; object-fit:cover; object-position:center 35%; border-radius:13px; }
+
+/* Simulador de terminal dos projetos em C */
+.c-project-page { width:min(1050px, 90%); margin:0 auto; padding:48px 0 80px; }
+.c-project-heading { margin:25px 0 28px; }
+.c-project-heading h1 { font:700 clamp(32px,5vw,48px)/1.12 'Space Grotesk',sans-serif; letter-spacing:-1.4px; margin:9px 0 14px; }
+.c-project-heading p { color:var(--muted); max-width:760px; line-height:1.8; font-size:14px; }
+.c-project-layout { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr); gap:22px; align-items:start; }
+.c-terminal { overflow:hidden; border:1px solid var(--line); border-radius:16px; background:#10131b; color:#e8edf7; box-shadow:var(--shadow); }
+.c-terminal-top { display:flex; align-items:center; gap:7px; padding:13px 16px; background:#1a1e29; border-bottom:1px solid #303646; color:#b7c0d1; font:12px Consolas,monospace; }
+.c-terminal-top .terminal-name { margin-left:8px; }
+.terminal-dot { width:9px; height:9px; border-radius:50%; background:#737d90; }
+.c-terminal-output { min-height:290px; max-height:430px; overflow:auto; padding:19px; white-space:pre-wrap; overflow-wrap:anywhere; font:13px/1.65 Consolas,'Courier New',monospace; color:#e4e9f2; }
+.c-terminal-output .terminal-muted { color:#98a4b8; }
+.c-terminal-output .terminal-user { color:#8ab4ff; }
+.c-terminal-form { display:flex; gap:9px; padding:13px; border-top:1px solid #303646; background:#171b25; }
+.c-terminal-form input { min-width:0; flex:1; padding:11px 12px; color:#fff; background:#0e1118; border:1px solid #3b4558; border-radius:8px; outline:none; font:13px Consolas,monospace; }
+.c-terminal-form input:focus { border-color:#779cff; }
+.c-terminal-form button { border:0; border-radius:8px; padding:0 17px; background:#5578e8; color:white; font-weight:600; cursor:pointer; }
+.c-terminal-help,.c-code-panel { border:1px solid var(--line); background:var(--surface); border-radius:15px; padding:20px; }
+.c-terminal-help h2,.c-code-panel h2 { font:600 18px 'Space Grotesk',sans-serif; margin:0 0 12px; }
+.c-terminal-help p,.c-terminal-help li { color:var(--muted); font-size:13px; line-height:1.75; }
+.c-terminal-help ul { padding-left:19px; margin:10px 0 0; }
+.c-terminal-help .reset-terminal { margin-top:14px; border:1px solid var(--line); background:transparent; color:var(--text); border-radius:8px; padding:9px 12px; cursor:pointer; }
+.c-code-panel { margin-top:24px; }
+.c-code-panel pre { overflow:auto; max-height:460px; padding:16px; border-radius:10px; background:var(--surface2); color:var(--text); font:12px/1.65 Consolas,monospace; }
+.c-project-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+@media(max-width:760px){ .c-project-layout{grid-template-columns:1fr;} .c-project-page{padding-top:30px;} .c-terminal-output{min-height:250px;} }
