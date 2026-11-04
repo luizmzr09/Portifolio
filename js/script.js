@@ -40,6 +40,11 @@ const projects = {
     techshop: {
         title: "TechShop",
         src: "projetos/techshop/index.html"
+    },
+
+    pokesearch: {
+        title: "PokeSearch",
+        src: "projetos/pokesearch/index.html"
     }
 };
 

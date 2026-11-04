@@ -1357,3 +1357,18 @@ button {
 }
 .poke-preview-name { color: #eef1ff; font: 700 20px 'Space Grotesk',sans-serif; letter-spacing: -.5px; z-index: 1; }
 .pokesearch-preview .project-number { z-index: 2; }
+
+/* Organização dos projetos por linguagem (mantém os cartões originais). */
+.project-category-title {
+    font: 600 19px 'Space Grotesk', sans-serif;
+    color: var(--text);
+    margin: 32px 0 18px;
+}
+.projects-section .section-heading + .project-category-title { margin-top: 28px; }
+.projects-grid + .project-category-title { margin-top: 45px; }
+
+/* Prévia do PokeSearch alinhada à nova identidade do projeto. */
+.pokesearch-preview { background: #142b4a; }
+.pokesearch-preview::before, .pokesearch-preview::after { display: none; }
+.poke-preview-orb { border-radius: 50%; color: #172f55; background: #f5ca45; border: 5px solid #f8f9fb; box-shadow: none; }
+.poke-preview-name { color: #f8fafc; }
